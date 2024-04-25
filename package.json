@@ -71,7 +71,7 @@
     ],
     "license": "MIT",
     "main": "./lib/index.js",
-    "name": "license-compliance",
+    "name": "@exodus/license-compliance",
     "nyc": {
         "all": true,
         "cache": false,
