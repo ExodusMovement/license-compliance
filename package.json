@@ -57,7 +57,7 @@
         "typescript": "5.4.4"
     },
     "engines": {
-        "node": ">=18.20.1"
+        "node": ">=16"
     },
     "files": [
         "/lib/**/*",
