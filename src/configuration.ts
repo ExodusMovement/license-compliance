@@ -6,6 +6,7 @@ import path from "path";
 import { Formatter, Report } from "./enumerations";
 import { parseExclude } from "./filters";
 import { Configuration, ExtendableConfiguration, RawConfiguration } from "./interfaces";
+import { isLicenseValid } from "./license";
 import { processArgs } from "./program";
 import { toPascal } from "./util";
 
@@ -54,7 +55,18 @@ export async function getConfiguration(nodeModulesPath: string): Promise<Configu
     // Validate configuration
     const result = joi
         .object({
-            allow: joi.array().items(joi.string()),
+            allow: joi
+                .array()
+                .items(joi.string())
+                .custom((licenses): boolean => {
+                    for (const license of licenses) {
+                        if (!isLicenseValid(license)) {
+                            throw new Error(`Invalid SDPX license identifier in "allow": "${license}"`);
+                        }
+                    }
+
+                    return true;
+                }),
             development: joi.boolean(),
             direct: joi.boolean(),
             exclude: joi.function().arity(1),
