@@ -127,7 +127,7 @@ async function getPackage(
     rootNodeModulesPath: string,
     packages: Array<Package>,
 ): Promise<void> {
-    const packagePath = await getInstalledPath(dependency, parentNodeModulesPath);
+    const packagePath = getInstalledPath(dependency, parentNodeModulesPath);
     if (packagePath === null) {
         console.error(chalk.red(`Package "${dependency}" was not found. Confirm that all modules are installed.`));
         return;
